@@ -13,6 +13,12 @@ public class Atividade4 {
         }
     }
     
+    public static void imprimirIpi(ArrayList<Ipi> listaIpi){
+        for(int contador = 0; contador < listaIpi.size(); contador++){
+            listaIpi.get(contador).imprimirImposto();
+        }
+    }
+    
     public static void main(String[] args) {
         ArrayList<Pis> listaPis = new ArrayList<Pis>();
         ArrayList<Ipi> listaIpi = new ArrayList<Ipi>();
@@ -75,11 +81,16 @@ public class Atividade4 {
             varResposta = teclado.next();
         }while(varResposta.equalsIgnoreCase("s"));
         
-        System.out.println("==========");
+         System.out.println("===");
         System.out.println("PIS");
-        System.out.println("==========");
-        System.out.println("Valor Total: " + varTotalPis);
+        System.out.println("===");
+        System.out.println("Valor Total Pis: " + varTotalPis);
         imprimirPis(listaPis);
+        System.out.println("===");
+        System.out.println("IPI");
+        System.out.println("===");
+        System.out.println("Valor Total Ipi: " + varTotalIpi);
+        imprimirIpi(listaIpi);
         
     }
     
