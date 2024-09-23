@@ -5,6 +5,10 @@ public class SuperClasseImposto {
     protected double varValorImposto = 0;
     protected final double CEM = 100;
     
+    public SuperClasseImposto(){
+    
+    };
+    
     protected double getValorImposto(){
         return this.varValorImposto;
     }

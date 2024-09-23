@@ -9,6 +9,10 @@ public class Pis extends SuperClasseImposto implements InterfaceImposto {
     protected double varCredito = 0;
     protected final double TAXA = 0.165;
     
+    public Pis(){
+        
+    }
+    
     public Pis(double varDebito, double varCredito){
         this.varDebito = varDebito;
         this.varCredito = varCredito;

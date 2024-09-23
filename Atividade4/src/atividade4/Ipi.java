@@ -11,6 +11,10 @@ public class Ipi extends SuperClasseImposto implements InterfaceImposto {
     double varDespesas = 0;
     double varAlicota = 0;
     
+    public Ipi(){
+    
+    }
+    
     public Ipi(double varValorProduto, double varValorFrete, double varValorSeguro, double varDespesas, double varAlicota){
         this.varValorProduto = varValorProduto;
         this.varValorFrete = varValorFrete;

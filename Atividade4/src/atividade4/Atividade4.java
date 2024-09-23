@@ -4,27 +4,54 @@ package atividade4;
     import java.util.ArrayList;
     import atividade4.Pis;
     import atividade4.Ipi;
+    import atividade4.Pagamento;
     import atividade4.SuperClasseImposto;
 
 public class Atividade4 {
     
-    public static void imprimirPis(ArrayList<Pis> listaPis){
-        for(int contador = 0; contador < listaPis.size(); contador++){
-            listaPis.get(contador).imprimirImposto();
+    public static void imprimirDados(ArrayList<Pagamento> listaPagamento){
+        
+        ArrayList<Pis> listaPis = new ArrayList<Pis>();
+        ArrayList<Ipi> listaIpi = new ArrayList<Ipi>();
+        
+        for(int contador = 0; contador < listaPagamento.size(); contador++){
+            if(listaPagamento.get(contador).getObjSuperClasseImposto() instanceof Pis){
+                listaPis.add((Pis) listaPagamento.get(contador).getObjSuperClasseImposto());
+            }
+            else{
+                listaIpi.add((Ipi) listaPagamento.get(contador).getObjSuperClasseImposto());
+            }
         }
+        
+        imprimirImpostos(listaPis, listaIpi);
+        
     }
     
-    public static void imprimirIpi(ArrayList<Ipi> listaIpi){
-        for(int contador = 0; contador < listaIpi.size(); contador++){
-            listaIpi.get(contador).imprimirImposto();
+    public static void imprimirImpostos(ArrayList<Pis> listaPis, ArrayList<Ipi> listaIpi){
+        
+        System.out.println("============");
+        System.out.println("Lista de PIS");
+        System.out.println("============");
+        for(Pis pis : listaPis){
+            pis.imprimirImposto();
+        }
+        
+        System.out.println("=========");
+        System.out.println("Lista IPI");
+        System.out.println("=========");
+        for(Ipi ipi : listaIpi){
+            ipi.imprimirImposto();
         }
     }
     
     public static void main(String[] args) {
-        ArrayList<Pis> listaPis = new ArrayList<Pis>();
-        ArrayList<Ipi> listaIpi = new ArrayList<Ipi>();
+        
+        
+        ArrayList<Pagamento> listaPagamento = new ArrayList<Pagamento>();
+        Pagamento objPagamento = new Pagamento();
         Scanner teclado = new Scanner(System.in);
         String varResposta =  "n";
+        String varNomeEmpresa = " ";
         int varOpcao = 0;
         double varTotalPis = 0;
         double varTotalIpi = 0;
@@ -36,8 +63,10 @@ public class Atividade4 {
         double varDespesas = 0;
         double varAlicota = 0;
         
+        System.out.print("Informe o nome da Empresa: ");
+        varNomeEmpresa = teclado.nextLine();
+        
         do{
-            
             System.out.println("Selecione um imposto: ");
             System.out.println("1 - Pis");
             System.out.println("2 - Ipi");
@@ -54,7 +83,8 @@ public class Atividade4 {
         
                     Pis objPis = new Pis(varDebito, varCredito);
                     varTotalPis += objPis.getValorImposto();
-                    listaPis.add(objPis);
+                    objPagamento = new Pagamento(varNomeEmpresa, objPis);
+                    listaPagamento.add(objPagamento);
                     break;
                 case 2:
                     
@@ -71,7 +101,8 @@ public class Atividade4 {
 
                     Ipi objIpi = new Ipi(varValorProduto, varValorFrete, varValorSeguro, varDespesas, varAlicota);
                     varTotalIpi += objIpi.getValorImposto();
-                    listaIpi.add(objIpi);
+                    objPagamento = new Pagamento(varNomeEmpresa, objIpi);
+                    listaPagamento.add(objPagamento);
                     break;
                 default:
                     System.out.println("Por favor, selecione uma opcao valida");
@@ -82,17 +113,21 @@ public class Atividade4 {
             varResposta = teclado.next();
         }while(varResposta.equalsIgnoreCase("s"));
         
-         System.out.println("===");
+        System.out.println("*******************************");
+        System.out.println("Nome Empresa: " + listaPagamento.get(0).getVarNomeEmpresa());
+        System.out.println("*******************************");
+        
+        System.out.println("===");
         System.out.println("PIS");
         System.out.println("===");
         System.out.println("Valor Total Pis: " + varTotalPis);
-        imprimirPis(listaPis);
+
         System.out.println("===");
         System.out.println("IPI");
         System.out.println("===");
         System.out.println("Valor Total Ipi: " + varTotalIpi);
-        imprimirIpi(listaIpi);
-        
+
+        imprimirDados(listaPagamento);
     }
     
 }
